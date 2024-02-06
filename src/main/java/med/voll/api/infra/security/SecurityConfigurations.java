@@ -28,7 +28,8 @@ public class SecurityConfigurations {
         return http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()// liberando rota de login
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers( "/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**").permitAll()// liberando rota de login
                 .anyRequest().authenticated()
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
